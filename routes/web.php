@@ -3,6 +3,9 @@
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AudienceController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\KelasSenamController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PelatihController;
 use App\Http\Controllers\PemasukkanController;
@@ -53,21 +56,11 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function(){
         Route::group(['prefix' => 'Audience'], function(){
             Route::get('', [AudienceController::class, 'index'])->name('audience');
             Route::get('detail/{id}', [AudienceController::class, 'detail'])->name('audience.detail');
-            // Route::get('data', [AnggotaController::class, 'indexData'])->name('anggota.data');
-            // Route::post('', [AnggotaController::class, 'store'])->name('anggota.add');
-            // Route::get('{uuid}', [AnggotaController::class, 'edit'])->name('anggota.edit');
-            // Route::put('{uuid}', [AnggotaController::class, 'update'])->name('anggota.update');
-            // Route::delete('{uuid}', [AnggotaController::class, 'delete'])->name('anggota.delete');
         });
 
         // Module Pemasukkan
         Route::group(['prefix' => 'Pemasukkan'], function(){
             Route::get('', [PemasukkanController::class, 'index'])->name('pemasukkan');
-            // Route::get('data', [AnggotaController::class, 'indexData'])->name('anggota.data');
-            // Route::post('', [AnggotaController::class, 'store'])->name('anggota.add');
-            // Route::get('{uuid}', [AnggotaController::class, 'edit'])->name('anggota.edit');
-            // Route::put('{uuid}', [AnggotaController::class, 'update'])->name('anggota.update');
-            // Route::delete('{uuid}', [AnggotaController::class, 'delete'])->name('anggota.delete');
         });
     });
 
@@ -76,10 +69,51 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function(){
         Route::group(['prefix' => 'Pelatih'], function(){
             Route::get('', [PelatihController::class, 'index'])->name('a.pelatih');
             Route::get('data', [PelatihController::class, 'indexData'])->name('a.pelatih.data');
-            Route::post('', [PelatihController::class, 'store'])->name('a.pelatih.add');
+            Route::get('tambah-data', [PelatihController::class, 'insert'])->name('a.pelatih.add');
+            Route::post('simpan-data', [PelatihController::class, 'store'])->name('a.pelatih.store');
             Route::get('{uuid}', [PelatihController::class, 'edit'])->name('a.pelatih.edit');
             Route::put('{uuid}', [PelatihController::class, 'update'])->name('a.pelatih.update');
-            Route::delete('{uuid}', [PelatihController::class, 'delete'])->name('a.pelatih.delete');
+            Route::delete('delete/{uuid}', [PelatihController::class, 'destroy'])->name('a.pelatih.delete');
+        });
+
+        // Module Anggota
+        Route::group(['prefix' => 'Anggota'], function(){
+            Route::get('', [AnggotaController::class, 'index'])->name('a.anggota');
+            Route::get('tambah-data', [AnggotaController::class, 'insert'])->name('a.anggota.add');
+            Route::post('simpan-data', [AnggotaController::class, 'store'])->name('a.anggota.store');
+            Route::get('{uuid}', [AnggotaController::class, 'edit'])->name('a.anggota.edit');
+            Route::put('{uuid}', [AnggotaController::class, 'update'])->name('a.anggota.update');
+            Route::delete('delete/{uuid}', [AnggotaController::class, 'destroy'])->name('a.anggota.delete');
+        });
+
+        // Module Jadwal
+        Route::group(['prefix' => 'Jadwal'], function(){
+            Route::get('', [JadwalController::class, 'index'])->name('a.jadwal');
+            Route::get('tambah-data', [JadwalController::class, 'insert'])->name('a.jadwal.add');
+            Route::post('simpan-data', [JadwalController::class, 'store'])->name('a.jadwal.store');
+            Route::get('{uuid}', [JadwalController::class, 'edit'])->name('a.jadwal.edit');
+            Route::put('{uuid}', [JadwalController::class, 'update'])->name('a.jadwal.update');
+            Route::delete('delete/{uuid}', [JadwalController::class, 'destroy'])->name('a.jadwal.delete');
+        });
+
+        // Module Kelas Senam
+        Route::group(['prefix' => 'Kelas-Senam'], function(){
+            Route::get('', [KelasSenamController::class, 'index'])->name('a.kelassenam');
+            Route::get('tambah-data', [KelasSenamController::class, 'insert'])->name('a.kelassenam.add');
+            Route::post('simpan-data', [KelasSenamController::class, 'store'])->name('a.kelassenam.store');
+            Route::get('{uuid}', [KelasSenamController::class, 'edit'])->name('a.kelassenam.edit');
+            Route::put('{uuid}', [KelasSenamController::class, 'update'])->name('a.kelassenam.update');
+            Route::delete('delete/{uuid}', [KelasSenamController::class, 'destroy'])->name('a.kelassenam.delete');
+        });
+
+        // Module Event
+        Route::group(['prefix' => 'Event'], function(){
+            Route::get('', [EventController::class, 'index'])->name('a.event');
+            Route::get('tambah-data', [EventController::class, 'insert'])->name('a.event.add');
+            Route::post('simpan-data', [EventController::class, 'store'])->name('a.event.store');
+            Route::get('{uuid}', [EventController::class, 'edit'])->name('a.event.edit');
+            Route::put('{uuid}', [EventController::class, 'update'])->name('a.event.update');
+            Route::delete('delete/{uuid}', [EventController::class, 'destroy'])->name('a.event.delete');
         });
     });
 });

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nama_sesi');
             $table->time('start');
             $table->time('finish');
-            $table->integer('total_jam');
             $table->timestamps();
         });
     }

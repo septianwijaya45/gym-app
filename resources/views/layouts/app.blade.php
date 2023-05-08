@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <!-- Theme style -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Toasr -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body class="hold-transition light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -149,7 +151,52 @@
         });
     </script>
 
-    @yield('script')
+    <!-- Toasr -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+            });
+
+            $('.swalDefaultSuccess').show(function() {
+            Toast.fire({
+                icon: 'success',
+                title: '{{Session::get('alert')}}'
+            })
+            });
+            $('.swalDefaultInfo').show(function() {
+            Toast.fire({
+                icon: 'info',
+                title: '{{Session::get('alert')}}'
+            })
+            });
+            $('.swalDefaultError').show(function() {
+            Toast.fire({
+                icon: 'error',
+                title: '{{Session::get('alert')}}'
+            })
+            });
+            $('.swalDefaultWarning').show(function() {
+            Toast.fire({
+                icon: 'warning',
+                title: '{{Session::get('alert')}}'
+            })
+            });
+            $('.swalDefaultQuestion').show(function() {
+            Toast.fire({
+                icon: 'question',
+                title: '{{Session::get('alert')}}'
+            })
+            });
+        });
+    </script>
+
+    @yield('footer')
 
 </body>
 

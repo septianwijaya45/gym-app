@@ -81,24 +81,24 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
+                        <a href="{{ route('a.pelatih') }}" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Pelatih
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
+                        <a href="{{ route('a.jadwal') }}" class="nav-link">
+                            <i class="nav-icon fas fa-calendar"></i>
                             <p>
                                 Master Jadwal 
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
+                        <a href="{{ route('a.kelassenam') }}" class="nav-link">
+                            <i class="nav-icon fas fa-landmark"></i>
                             <p>
                                 Master Kelas Senam 
                             </p>
@@ -113,16 +113,16 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
+                        <a href="{{ route('a.anggota') }}" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Anggota
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
+                        <a href="{{ route('a.event') }}" class="nav-link">
+                            <i class="nav-icon fas fa-city"></i>
                             <p>
                                 Events
                             </p>

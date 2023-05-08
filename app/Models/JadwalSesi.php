@@ -10,6 +10,6 @@ class JadwalSesi extends Model
     use HasFactory;
     protected $table = 'jadwal_sesies';
     protected $fillable = [
-        'nama_sesi', 'start', 'finish', 'total_jam'
+        'nama_sesi', 'start', 'finish'
     ];
 }

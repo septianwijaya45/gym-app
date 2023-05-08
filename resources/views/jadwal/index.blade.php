@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Pelatih')
+@section('title', 'Master Jadwal')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -21,12 +21,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Data Pelatih</h1>
+                        <h1 class="m-0">Data Master Jadwal</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Data Pelatih</li>
+                            <li class="breadcrumb-item active">Data Jadwal</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -43,10 +43,10 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Data Pelatih</h5>
+                                <h5 class="card-title">Data Master Jadwal</h5>
                                 @if(Auth::user()->role_id == 2)
                                     <div class="card-tools">
-                                        <a href="{{ route('a.pelatih.add') }}" class="btn btn-success btn-sm">
+                                        <a href="{{ route('a.jadwal.add') }}" class="btn btn-success btn-sm">
                                             <i class="fas fa-plus"></i> Tambah Data
                                         </a>
                                     </div>
@@ -60,28 +60,24 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%" style="text-align: center;">No</th>
-                                                <th>Nama</th>
-                                                <th>Asal Kota</th>
-                                                <th>TTL</th>
-                                                <th>Telepon</th>
-                                                <th>Jenis Pelatih</th>
+                                                <th>Nama Sesi</th>
+                                                <th>Start</th>
+                                                <th>Finish</th>
                                                 @if(Auth::user()->role_id == 2)
                                                     <th width="10%">Aksi</th>
                                                 @endif
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($pelatih as $data)
+                                            @foreach ($jadwal as $data)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $data->nama }}</td>
-                                                    <td>{{ $data->asal_kota }}</td>
-                                                    <td>{{ $data->tempat_lahir.', '.$data->tgl_lahir }}</td>
-                                                    <td>{{ $data->no_telp }}</td>
-                                                    <td>{{ $data->jenis_pelatih }}</td>
+                                                    <td>{{ $data->nama_sesi }}</td>
+                                                    <td>{{ $data->start }}</td>
+                                                    <td>{{ $data->finish }}</td>
                                                     @if(Auth::user()->role_id == 2)
                                                         <td>
-                                                            <a href="{{ route('a.pelatih.edit', $data->id) }}"> <button class="btn btn-warning btn-sm"><i class="fa fa-pen"></i></button></a>
+                                                            <a href="{{ route('a.jadwal.edit', $data->id) }}"> <button class="btn btn-warning btn-sm"><i class="fa fa-pen"></i></button></a>
                                                             <button type="button" class="btn btn-danger btn-sm" onClick="deleteData({{$data->id}})"><i class="fa fa-trash"></i></button>
                                                         </td>
                                                     @endif
@@ -161,7 +157,7 @@
                     }
                 });
                 $.ajax({
-                        url: "{{url('Admin/Pelatih/delete')}}/"+id,
+                        url: "{{url('Admin/Jadwal/delete')}}/"+id,
                         method: 'DELETE',
                         success: function (results) {
                             new swal("Berhasil!", "Data Berhasil Dihapus!", "success");

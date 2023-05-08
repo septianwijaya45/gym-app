@@ -34,7 +34,7 @@
                                 <h5 class="card-title">Data Anggota</h5>
                                 @if(Auth::user()->role_id == 2)
                                     <div class="card-tools">
-                                        <a href="{{ route('anggota.add') }}" class="btn btn-success btn-sm">
+                                        <a href="{{ route('a.anggota.add') }}" class="btn btn-success btn-sm">
                                             <i class="fas fa-plus"></i> Tambah Data
                                         </a>
                                     </div>
@@ -69,13 +69,13 @@
                                                     <td>
                                                         @if(Auth::user()->role_id == 1)
                                                             @if($data->status_anggota == 0)
-                                                                <button type="button" class="btn btn-sm btn-warning disabled">Nonaktif</button>
+                                                                <button type="button" class="btn btn-sm btn-warning disabled">Non Member</button>
                                                             @else
                                                                 <button type="button" class="btn btn-sm btn-light disabled">Member Aktif</button>
                                                             @endif
                                                         @elseif(Auth::user()->role_id == 2)
                                                             @if($data->status_anggota == 0)
-                                                                <button type="button" class="btn btn-sm btn-warning" onclick="aktifAnggota($data->id)">Nonaktif</button>
+                                                                <button type="button" class="btn btn-sm btn-warning" onclick="aktifAnggota($data->id)">Non Member</button>
                                                             @else
                                                                 <button type="button" class="btn btn-sm btn-light" onclick="aktifAnggota($data->id)">Member Aktif</button>
                                                             @endif
@@ -83,8 +83,8 @@
                                                     </td>
                                                     @if(Auth::user()->role_id == 2)
                                                         <td>
-                                                            <a href="{{ route('anggota.edit', $data->id) }}"> <button class="btn btn-warning btn-sm"><i class="fa fa-eye"></i></button></a>
-                                                            <button type="button" class="btn btn-danger btn-sm" onClick="deleteData('.$data->id.')"><i class="fa fa-trash"></i></button>
+                                                            <a href="{{ route('a.anggota.edit', $data->id) }}"> <button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></a>
+                                                            <button type="button" class="btn btn-danger btn-sm" onClick="deleteData({{$data->id}})"><i class="fa fa-trash"></i></button>
                                                         </td>
                                                     @endif
                                                 </tr>
@@ -107,7 +107,7 @@
     </div>
 @endsection
 
-@section('script')
+@section('footer')
 @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
 <script>
     var dtTableOption = {
@@ -143,6 +143,44 @@
 
     $("#dataTable").DataTable(dtTableOption).buttons().container().appendTo(
                         '#tbl_kain_roll_wrapper .col-md-6:eq(0)')
+</script>
+
+<script type="text/javascript">
+    function deleteData(id){
+        new swal({
+            title: "Anda Yakin?",
+            text: "Untuk menghapus data ini?",
+            icon: 'warning',
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak",
+            buttons: true,
+            dangerMode: true
+        })
+        .then((willDelete) => {
+            if(willDelete) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                        url: "{{url('Admin/Anggota/delete')}}/"+id,
+                        method: 'DELETE',
+                        success: function (results) {
+                            new swal("Berhasil!", "Data Berhasil Dihapus!", "success");
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 1500);
+                        },
+                        error: function (results) {
+                            new swal("GAGAL!", "Gagal Menghapus Data!", "error");
+                        }
+                    });
+            }else{
+                new swal("Data Alasan Batal Dihapus", "", "info")
+            }
+        })
+    }
 </script>
 @else
 <script>
