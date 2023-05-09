@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Anggota')
+@section('title', 'Pembayaran')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Data Anggota</h1>
+                        <h1 class="m-0">Data Pembayaran</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Data Anggota</li>
+                            <li class="breadcrumb-item active">Data Pembayaran</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -31,14 +31,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Data Anggota</h5>
-                                {{-- @if(Auth::user()->role_id == 2)
-                                    <div class="card-tools">
-                                        <a href="{{ route('a.anggota.add') }}" class="btn btn-success btn-sm">
-                                            <i class="fas fa-plus"></i> Tambah Data
-                                        </a>
-                                    </div>
-                                @endif --}}
+                                <h5 class="card-title">Data Pembayaran</h5>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -48,45 +41,33 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%" style="text-align: center;">No</th>
-                                                <th>Nama</th>
-                                                <th>Alamat</th>
-                                                <th>TTL</th>
-                                                <th>Telepon</th>
-                                                <th>Status Akun</th>
-                                                {{-- @if(Auth::user()->role_id == 2)
-                                                    <th width="10%">Aksi</th>
-                                                @endif --}}
+                                                <th>Nama Pemesan</th>
+                                                <th>Pendaftaran Kelas</th>
+                                                <th>Total Pembayaran</th>
+                                                <th>Bukti Pembayaran</th>
+                                                <th>Konfirmasi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($anggota as $data)
+                                            @foreach ($pembayaran as $data)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $data->nama }}</td>
-                                                    <td>{{ $data->alamat }}</td>
-                                                    <td>{{ $data->tempat_lahir.', '.$data->tgl_lahir }}</td>
-                                                    <td>{{ $data->no_telp }}</td>
+                                                    <td>{{ $data->nama_anggota }}</td>
+                                                    <td>{{ $data->nama_kelas }}</td>
+                                                    <td>Rp {{ $data->total_dibayar }}</td>
                                                     <td>
-                                                        @if(Auth::user()->role_id == 1)
-                                                            @if($data->status_anggota == 0)
-                                                                <button type="button" class="btn btn-sm btn-warning disabled">Non Member</button>
-                                                            @else
-                                                                <button type="button" class="btn btn-sm btn-light disabled">Member Aktif</button>
-                                                            @endif
-                                                        @elseif(Auth::user()->role_id == 2)
-                                                            @if($data->status_anggota == 0)
-                                                                <button type="button" class="btn btn-sm btn-warning" onclick="aktifAnggota($data->id)">Non Member</button>
-                                                            @else
-                                                                <button type="button" class="btn btn-sm btn-light" onclick="aktifAnggota($data->id)">Member Aktif</button>
-                                                            @endif
+                                                        <img src="{{ asset('/img/payment/'.$data->bukti_transfer) }}" alt="Bukti Pembayaran" width="200">
+                                                    </td>
+                                                    <td>
+                                                        @if($data->status_konfirmasi == 1)
+                                                            <button type="button" class="btn btn-sm btn-light disabled">Terkonfirmasi</button>
+                                                        @elseif($data->status_konfirmasi == 0 || $data->status_konfirmasi == null)
+                                                            <button type="button" class="btn btn-sm btn-warning" onclick="tolakPembayaran({{$data->id}})">Reject</button>
+                                                            <button type="button" class="btn btn-sm btn-success" onclick="terimaPembayaran({{$data->id}})">Accept</button>
+                                                        @elseif($data->status_konfirmasi == 2)
+                                                            <button type="button" class="btn btn-sm btn-danger" disabled>Rejected</button>
                                                         @endif
                                                     </td>
-                                                    {{-- @if(Auth::user()->role_id == 2)
-                                                        <td>
-                                                            <a href="{{ route('a.anggota.edit', $data->id) }}"> <button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></a>
-                                                            <button type="button" class="btn btn-danger btn-sm" onClick="deleteData({{$data->id}})"><i class="fa fa-trash"></i></button>
-                                                        </td>
-                                                    @endif --}}
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -146,38 +127,72 @@
 </script>
 
 <script type="text/javascript">
-    function deleteData(id){
-        new swal({
-            title: "Anda Yakin?",
-            text: "Untuk menghapus data ini?",
-            icon: 'warning',
-            confirmButtonText: "Ya",
-            cancelButtonText: "Tidak",
-            buttons: true,
-            dangerMode: true
-        })
-        .then((willDelete) => {
-            if(willDelete) {
+    function tolakPembayaran(id){
+        new Swal({
+            title: 'Anda yakin tolak pembayaran ini?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            denyButtonText: `Tidak`,
+        }).then((result) => {
+            if (result.isConfirmed) {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+
                 $.ajax({
-                        url: "{{url('Admin/Anggota/delete')}}/"+id,
-                        method: 'DELETE',
-                        success: function (results) {
-                            new swal("Berhasil!", "Data Berhasil Dihapus!", "success");
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 1500);
-                        },
-                        error: function (results) {
-                            new swal("GAGAL!", "Gagal Menghapus Data!", "error");
-                        }
-                    });
-            }else{
-                new swal("Data Alasan Batal Dihapus", "", "info")
+                    url: "{{url('Admin/Pembayaran/penolakan')}}/"+id,
+                    method: 'PUT',
+                    success: function (results) {
+                        new swal("Success!", "Pembayaran Ditolak!", "warning");
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500);
+                    },
+                    error: function (results) {
+                        new swal("GAGAL!", "Gagal Konfirmasi Data!", "error");
+                    }
+                });
+                
+            } else if (result.isDenied) {
+                Swal.fire('Batal Konfirmasi', '', 'info')
+            }
+        })
+    }
+
+    function terimaPembayaran(id){
+        new Swal({
+            title: 'Anda yakin untuk konfirmasi pembayaran?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            denyButtonText: `Tidak`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    url: "{{url('Admin/Pembayaran/konfirmasi')}}/"+id,
+                    method: 'PUT',
+                    success: function (results) {
+                        new swal("Success!", "Pembayaran Diterima!", "success");
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500);
+                    },
+                    error: function (results) {
+                        new swal("GAGAL!", "Gagal Konfirmasi Data!", "error");
+                    }
+                });
+
+            } else if (result.isDenied) {
+                Swal.fire('Konfirmasi Dibatalkan!', '', 'info')
             }
         })
     }

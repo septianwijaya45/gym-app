@@ -105,7 +105,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('a.pembayaran') }}" class="nav-link">
                             <i class="nav-icon fas fa-film"></i>
                             <p>
                                 Pembayaran
@@ -191,16 +191,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-film"></i>
+                    <a href="{{ route('m.kelassenam') }}" class="nav-link">
+                        <i class="nav-icon fas fa-landmark"></i>
                         <p>
                             Kelas Senam
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-film"></i>
+                    <a href="{{ route('m.pelatih') }}" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
                         <p>
                             Pelatih
                         </p>
@@ -223,8 +223,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-film"></i>
+                    <a href="{{ route('m.event') }}" class="nav-link">
+                        <i class="nav-icon fas fa-city"></i>
                         <p>
                             Event
                         </p>

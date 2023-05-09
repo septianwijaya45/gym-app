@@ -4,11 +4,14 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AudienceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KelasSenamController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PelatihController;
 use App\Http\Controllers\PemasukkanController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,9 +26,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return redirect()->route('loginpage');
-});
+Route::get('/', [HomeController::class, 'index']);
+
+Route::get('register', [RegisterController::class, 'index'])->name('register');
 
 Route::get('login', [LoginController::class, 'index'])->name('loginpage');
 Route::post('login', [LoginController::class, 'login'])->name('login');
@@ -106,6 +109,13 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function(){
             Route::delete('delete/{uuid}', [KelasSenamController::class, 'destroy'])->name('a.kelassenam.delete');
         });
 
+        // Module Pembayaran
+        Route::group(['prefix' => 'Pembayaran'], function(){
+            Route::get('', [PembayaranController::class, 'index'])->name('a.pembayaran');
+            Route::put('konfirmasi/{id}', [PembayaranController::class, 'acceptPayment'])->name('a.pembayaran.konfirmasi');
+            Route::put('penolakan/{id}', [PembayaranController::class, 'rejectPayment'])->name('a.pembayaran.penolakan');
+        });
+
         // Module Event
         Route::group(['prefix' => 'Event'], function(){
             Route::get('', [EventController::class, 'index'])->name('a.event');
@@ -114,6 +124,23 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function(){
             Route::get('{uuid}', [EventController::class, 'edit'])->name('a.event.edit');
             Route::put('{uuid}', [EventController::class, 'update'])->name('a.event.update');
             Route::delete('delete/{uuid}', [EventController::class, 'destroy'])->name('a.event.delete');
+        });
+    });
+
+    Route::group(['roles' => 'Member', 'prefix' => 'Member'], function(){
+        // Module Kelas Senam
+        Route::group(['prefix' => 'Kelas-Senam'], function(){
+            Route::get('', [KelasSenamController::class, 'index'])->name('m.kelassenam');
+        });
+
+        // Module Pelatih
+        Route::group(['prefix' => 'Pelatih'], function(){
+            Route::get('', [PelatihController::class, 'index'])->name('m.pelatih');
+        });
+
+        // Module Event
+        Route::group(['prefix' => 'Event'], function(){
+            Route::get('', [EventController::class, 'index'])->name('m.event');
         });
     });
 });

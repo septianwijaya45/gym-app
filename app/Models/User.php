@@ -56,7 +56,7 @@ class User extends Authenticatable
             return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa1DxUfQMzO1sop6bSYve0McW6ynr6zEgfwJFnuORImw&s';
         }
 
-        return asset('backend/images/profile/'.$this->image);
+        return asset('img/profile/'.$this->image);
     }
     // Check Images
 

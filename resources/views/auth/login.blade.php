@@ -21,7 +21,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Admin</b>LTE</a>
+    <a href="#"><b>Gym App</b> Login Page</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
