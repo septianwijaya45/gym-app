@@ -17,8 +17,23 @@
   <link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  {{-- SweetAlert --}}
+  <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
 </head>
 <body class="hold-transition login-page">
+  
+  @if(Session::has('alert'))
+  @if(Session::get('sweetalert')=='success')
+      <div class="swalDefaultSuccess">
+      </div>
+  @elseif(Session::get('sweetalert')=='error')
+      <div class="swalDefaultError">
+      </div>
+  @elseif(Session::get('sweetalert')=='warning')
+      <div class="swalDefaultWarning">
+      </div>
+  @endif
+@endif
 <div class="login-box">
   <div class="login-logo">
     <a href="#"><b>Gym App</b> Login Page</a>
@@ -76,5 +91,53 @@
 <!-- AdminLTE App -->
 <script src="{{asset('js/adminlte.min.js')}}"></script>
 
+<!-- Sweet Alert -->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+<!-- Toasr -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+        });
+
+        $('.swalDefaultSuccess').show(function() {
+        Toast.fire({
+            icon: 'success',
+            title: '{{Session::get('alert')}}'
+        })
+        });
+        $('.swalDefaultInfo').show(function() {
+        Toast.fire({
+            icon: 'info',
+            title: '{{Session::get('alert')}}'
+        })
+        });
+        $('.swalDefaultError').show(function() {
+        Toast.fire({
+            icon: 'error',
+            title: '{{Session::get('alert')}}'
+        })
+        });
+        $('.swalDefaultWarning').show(function() {
+        Toast.fire({
+            icon: 'warning',
+            title: '{{Session::get('alert')}}'
+        })
+        });
+        $('.swalDefaultQuestion').show(function() {
+        Toast.fire({
+            icon: 'question',
+            title: '{{Session::get('alert')}}'
+        })
+        });
+    });
+</script>
 </body>
 </html>

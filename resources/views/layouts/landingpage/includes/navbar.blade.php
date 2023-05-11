@@ -53,7 +53,7 @@
                             <a href="#kelas" class="nav-item nav-link">Kelas</a>
                             <a href="#pelatih" class="nav-item nav-link">Trainer Kami</a>
                         </div>
-                        <a href="" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Login</a>
+                        <a href="{{ route('login') }}" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Login</a>
                     </div>
                 </nav>
             </div>

@@ -207,15 +207,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-film"></i>
+                    <a href="{{route('m.daftarKelas')}}" class="nav-link">
+                        <i class="nav-icon fas fa-cash-register"></i>
                         <p>
                             Daftar Kelas Senam
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('m.pembayaran') }}" class="nav-link">
                         <i class="nav-icon fas fa-film"></i>
                         <p>
                             Pembayaran

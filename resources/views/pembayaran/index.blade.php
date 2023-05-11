@@ -32,6 +32,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title">Data Pembayaran</h5>
+                                @if(Auth::user()->role_id == 4 || Auth::user()->role_id == 5)
+                                <div class="card-tools">
+                                    <select name="status" id="status" class="form-control float-right">
+                                        <option value="1">Sudah Dibayar</option>
+                                        <option value="0">Belum Dibayar</option>
+                                    </select>
+                                </div>
+                                @endif
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -66,6 +74,47 @@
                                                             <button type="button" class="btn btn-sm btn-success" onclick="terimaPembayaran({{$data->id}})">Accept</button>
                                                         @elseif($data->status_konfirmasi == 2)
                                                             <button type="button" class="btn btn-sm btn-danger" disabled>Rejected</button>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <table id="dataTable2" class="table table-bordered table-striped dataTable" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%" style="text-align: center;">No</th>
+                                                <th>Nama Kelas</th>
+                                                <th>Harga Kelas</th>
+                                                <th>Jam Kelas</th>
+                                                <th>Nama Pelatih</th>
+                                                <th>Kelas Dimulai</th>
+                                                <th>Kelas Selesai</th>
+                                                <th>Diskon</th>
+                                                <th>Total Dibayar</th>
+                                                <th>Konfirmasi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($belumDibayar as $data)
+                                                <tr>
+                                                    <td>{{ $noBP++ }}</td>
+                                                    <td>{{ $data->nama_kelas }}</td>
+                                                    <td>{{ $data->harga }}</td>
+                                                    <td>{{ $data->jam }}</td>
+                                                    <td>{{ $data->nama_pelatih }}</td>
+                                                    <td>{{ date('d F Y', strtotime($data->paket_mulai)) }}</td>
+                                                    <td>{{ date('d F Y', strtotime($data->paket_selesai)) }}</td>
+                                                    <td>{{ $data->diskon }}</td>
+                                                    <td>{{ $data->total_harga }}</td>
+                                                    <td>
+                                                        @if($data->status_pembayaran == 1)
+                                                            <button type="button" class="btn btn-sm btn-light disabled">Selesai Pembayaran</button>
+                                                        @elseif($data->status_pembayaran == 0 || $data->status_pembayaran == null)
+                                                            <button type="button" class="btn btn-sm btn-warning" onclick="pembayaran({{$data->id}})">Bayar Pesanan</button>
+                                                            <button type="button" class="btn btn-sm btn-danger" onclick="batalPesanan({{$data->id}})">Batalkan Pesanan</button>
+                                                        @elseif($data->status_pembayaran == 2)
+                                                            <button type="button" class="btn btn-sm btn-danger" disabled>Dibatalkan</button>
                                                         @endif
                                                     </td>
                                                 </tr>

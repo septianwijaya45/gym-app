@@ -310,7 +310,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="team-item position-relative">
                     <div class="position-relative overflow-hidden rounded">
-                        <img class="img-fluid w-100" src="{{ ($p->image == null) ? asset('landingpage/img/team-1.jpg') : asset('img/profile/'.$p->image) }}" alt="">
+                        <img class="img-fluid w-100" src="{{ ($p->image == null) ? asset('landingpage/img/about.jpg') : asset('img/profile/'.$p->image) }}" alt="">
                         <div class="team-overlay">
                             <div class="d-flex align-items-center justify-content-start">
                                 <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i class="fab fa-twitter"></i></a>

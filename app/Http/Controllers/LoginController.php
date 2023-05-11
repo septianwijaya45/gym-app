@@ -73,12 +73,13 @@ class LoginController extends Controller
             return redirect()->route('dashboard')->with('alert', 'Selamat Datang!');
         }
         
+        Session::put('sweetalert', 'error');
         return redirect('login')->with('alert','Email atau Password anda salah!');
     }
 
     public function logout(){
         Auth::logout();
         Session::put('sweetalert', 'success');
-        return redirect()->route('login')->with('alert', 'Sign Out Berhasil!');
+        return redirect()->route('homepage')->with('alert', 'Sign Out Berhasil!');
     }
 }

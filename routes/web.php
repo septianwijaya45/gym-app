@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AudienceController;
+use App\Http\Controllers\DaftarKelasSenamController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
@@ -26,9 +27,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('homepage');
 
 Route::get('register', [RegisterController::class, 'index'])->name('register');
+Route::post('register', [RegisterController::class, 'store'])->name('registerPost');
 
 Route::get('login', [LoginController::class, 'index'])->name('loginpage');
 Route::post('login', [LoginController::class, 'login'])->name('login');
@@ -141,6 +143,21 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function(){
         // Module Event
         Route::group(['prefix' => 'Event'], function(){
             Route::get('', [EventController::class, 'index'])->name('m.event');
+        });
+
+        // Module Anggota
+        Route::group(['prefix' => 'Daftar-Kelas-Senam'], function(){
+            Route::get('', [DaftarKelasSenamController::class, 'index'])->name('m.daftarKelas');
+            Route::get('tambah-data/{id}', [DaftarKelasSenamController::class, 'insert'])->name('m.daftarKelas.add');
+            Route::post('simpan-data', [DaftarKelasSenamController::class, 'store'])->name('m.daftarKelas.store');
+            Route::get('{uuid}', [DaftarKelasSenamController::class, 'edit'])->name('m.daftarKelas.edit');
+            // batalkan
+            Route::delete('delete/{uuid}', [DaftarKelasSenamController::class, 'destroy'])->name('m.daftarKelas.delete');
+        });
+
+        // Module Pembayaran
+        Route::group(['prefix' => 'Pembayaran'], function(){
+            Route::get('', [PembayaranController::class, 'index'])->name('m.pembayaran');
         });
     });
 });
