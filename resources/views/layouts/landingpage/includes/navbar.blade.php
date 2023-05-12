@@ -4,7 +4,7 @@
         <div class="row gx-0">
             <div class="col-lg-3 bg-dark d-none d-lg-block">
                 <a href="index.html" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
-                    <h1 class="m-0 display-4 text-primary text-uppercase">Gym App</h1>
+                    <h1 class="m-0 display-4 text-primary text-uppercase">SSA</h1>
                 </a>
             </div>
             <div class="col-lg-9">

@@ -36,7 +36,11 @@
                 <div class="row">
                     <div class="col-lg-12 col-xl-12">
                         <div class="card">
-                            <form action="{{ route('a.daftarKelas.store') }}" class="form-profile" method="POST" enctype="multipart/form-data" autocomplete="off" id="formTambahData">
+                            @if(Auth::user()->role_id == 4)
+                                <form action="{{ route('m.daftarKelas.store') }}" class="form-profile" method="POST" enctype="multipart/form-data" autocomplete="off" id="formTambahData">
+                            @elseif(Auth::user()->role_id == 5)
+                                <form action="{{ route('nm.daftarKelas.store') }}" class="form-profile" method="POST" enctype="multipart/form-data" autocomplete="off" id="formTambahData">
+                            @endif
                                 @csrf
                                 <div class="card-body">
                                     <div class="row">

@@ -12,7 +12,7 @@ class EventController extends Controller
 {
     public function index()
     {
-        $event = Events::all();
+        $event = Events::orderBy('created_at', 'DESC')->get();
         $no = 1;
         return view('event.index', compact(['event', 'no']));
     }

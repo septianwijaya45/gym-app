@@ -80,7 +80,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <table id="dataTable2" class="table table-bordered table-striped dataTable" style="width: 100%;">
+                                    <table id="dataTable2" class="table table-bordered table-striped dataTable" style="width: 100%; display:none">
                                         <thead>
                                             <tr>
                                                 <th width="5%" style="text-align: center;">No</th>

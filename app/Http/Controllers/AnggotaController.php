@@ -6,6 +6,7 @@ use App\Models\Anggota;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +14,17 @@ class AnggotaController extends Controller
 {
     public function index()
     {
-        $anggota = Anggota::all();
+        if(Auth::user()->role_id == 3){
+            $anggota = Anggota::join('pendaftaran_kelases', 'pendaftaran_kelases.user_id', '=', 'anggotais.user_id')
+                        ->join('kelas_senams', 'kelas_senams.id', '=', 'pendaftaran_kelases.kelas_senam_id')
+                        ->join('jadwal_sesies', 'jadwal_sesies.id', '=', 'kelas_senams.jadwal_sesi_id')
+                        ->select('anggotais.*', 'kelas_senams.nama as nama_kelas', 'jadwal_sesies.start', 'jadwal_sesies.finish', 'pendaftaran_kelases.paket_mulai', 'pendaftaran_kelases.paket_selesai')
+                        ->where('status_pembayaran', 1)
+                        ->orderBy('pendaftaran_kelases.created_at', 'DESC')
+                        ->get();
+        }else{
+            $anggota = Anggota::all();
+        }
         $no = 1;
         return view('anggota.index', compact(['anggota', 'no']));
     }

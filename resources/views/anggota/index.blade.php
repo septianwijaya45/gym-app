@@ -32,13 +32,13 @@
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title">Data Anggota</h5>
-                                {{-- @if(Auth::user()->role_id == 2)
+                                @if(Auth::user()->role_id == 2)
                                     <div class="card-tools">
                                         <a href="{{ route('a.anggota.add') }}" class="btn btn-success btn-sm">
                                             <i class="fas fa-plus"></i> Tambah Data
                                         </a>
                                     </div>
-                                @endif --}}
+                                @endif
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -52,10 +52,16 @@
                                                 <th>Alamat</th>
                                                 <th>TTL</th>
                                                 <th>Telepon</th>
+                                                @if(Auth::user()->role_id == 3)
+                                                <th>Kelas Senam Diikuti</th>
+                                                <th>Tanggal Mulai</th>
+                                                <th>Tanggal Selesai</th>
+                                                <th>Sesi Kelas</th>
+                                                @endif
                                                 <th>Status Akun</th>
-                                                {{-- @if(Auth::user()->role_id == 2)
+                                                @if(Auth::user()->role_id == 2)
                                                     <th width="10%">Aksi</th>
-                                                @endif --}}
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -66,8 +72,14 @@
                                                     <td>{{ $data->alamat }}</td>
                                                     <td>{{ $data->tempat_lahir.', '.$data->tgl_lahir }}</td>
                                                     <td>{{ $data->no_telp }}</td>
+                                                    @if(Auth::user()->role_id == 3)
+                                                    <td>{{ $data->nama_kelas }}</td>
+                                                    <td>{{ $data->paket_mulai }}</td>
+                                                    <td>{{ $data->paket_selesai }}</td>
+                                                    <td>{{ $data->start.' - '.$data->finish }}</td>
+                                                    @endif
                                                     <td>
-                                                        @if(Auth::user()->role_id == 1)
+                                                        @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 3)
                                                             @if($data->status_anggota == 0)
                                                                 <button type="button" class="btn btn-sm btn-warning disabled">Non Member</button>
                                                             @else
@@ -81,12 +93,12 @@
                                                             @endif
                                                         @endif
                                                     </td>
-                                                    {{-- @if(Auth::user()->role_id == 2)
+                                                    @if(Auth::user()->role_id == 2)
                                                         <td>
                                                             <a href="{{ route('a.anggota.edit', $data->id) }}"> <button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></a>
                                                             <button type="button" class="btn btn-danger btn-sm" onClick="deleteData({{$data->id}})"><i class="fa fa-trash"></i></button>
                                                         </td>
-                                                    @endif --}}
+                                                    @endif
                                                 </tr>
                                             @endforeach
                                         </tbody>

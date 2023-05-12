@@ -11,7 +11,7 @@
                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                     <div class="p-3" style="max-width: 900px;">
                         <h5 class="text-white text-uppercase">Best Gym Center</h5>
-                        <h1 class="display-2 text-white text-uppercase mb-md-4">Build Your Body Strong With Gymster</h1>
+                        <h1 class="display-2 text-white text-uppercase mb-md-4">Build Your Body Strong With Sanggar Senam Atheena</h1>
                         <a href="{{ route('login') }}" class="btn btn-primary py-md-3 px-md-5 me-3">Login</a>
                         <a href="{{ route('register') }}" class="btn btn-light py-md-3 px-md-5">Register</a>
                     </div>
@@ -55,7 +55,7 @@
         <div class="col-lg-7">
             <div class="mb-4">
                 <h5 class="text-primary text-uppercase">About Us</h5>
-                <h1 class="display-3 text-uppercase mb-0">Welcome to Gymster</h1>
+                <h1 class="display-3 text-uppercase mb-0">Welcome to Sanggar Senam Atheena</h1>
             </div>
             <h4 class="text-body mb-4">Diam dolor diam ipsum tempor sit. Clita erat ipsum et lorem stet no labore lorem sit clita duo justo magna dolore</h4>
             <p class="mb-4">Nonumy erat diam duo labore clita. Sit magna ipsum dolor sed ea duo at ut. Tempor sit lorem sit magna ipsum duo. Sit eos dolor ut sea rebum, diam sea rebum lorem kasd ut ipsum dolor est ipsum. Et stet amet justo amet clita erat, ipsum sed at ipsum eirmod labore lorem.</p>

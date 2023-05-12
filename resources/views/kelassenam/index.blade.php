@@ -64,6 +64,7 @@
                                                 <th>Sesi</th>
                                                 <th>Pelatih</th>
                                                 <th>Diskon</th>
+                                                <th>Harga</th>
                                                 <th>Hari</th>
                                                 @if(Auth::user()->role_id == 2)
                                                     <th width="10%">Aksi</th>
@@ -78,6 +79,7 @@
                                                     <td>{{ $data->sesi }}</td>
                                                     <td>{{ $data->nama_pelatih }}</td>
                                                     <td>{{ $data->diskon.'%' }}</td>
+                                                    <td>{{ 'Rp '.$data->harga }}</td>
                                                     <td>{{ $data->hari }}</td>
                                                     @if(Auth::user()->role_id == 2)
                                                         <td>

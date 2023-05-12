@@ -33,7 +33,7 @@
     @endif
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="{{ route('register') }}" class="h1"><b>Gym App</b> Register</a>
+      <a href="{{ route('register') }}" class="h1"><b>Sanggar Senam Atheena</b> Register</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Register a new membership</p>

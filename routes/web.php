@@ -50,11 +50,6 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function(){
         Route::group(['prefix' => 'Anggota'], function(){
             Route::get('', [AnggotaController::class, 'index'])->name('anggota');
             Route::get('detail/{id}', [AnggotaController::class, 'detail'])->name('anggota.detail');
-            // Route::get('data', [AnggotaController::class, 'indexData'])->name('anggota.data');
-            // Route::post('', [AnggotaController::class, 'store'])->name('anggota.add');
-            // Route::get('{uuid}', [AnggotaController::class, 'edit'])->name('anggota.edit');
-            // Route::put('{uuid}', [AnggotaController::class, 'update'])->name('anggota.update');
-            // Route::delete('{uuid}', [AnggotaController::class, 'delete'])->name('anggota.delete');
         });
 
         // Module Audience
@@ -129,6 +124,23 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function(){
         });
     });
 
+    Route::group(['roles' => 'Pelatih', 'prefix' => 'Pelatih'], function(){
+        // Module Anggota
+        Route::group(['prefix' => 'Anggota'], function(){
+            Route::get('', [AnggotaController::class, 'index'])->name('p.anggota');
+        });
+
+        // Module Event
+        Route::group(['prefix' => 'Event'], function(){
+            Route::get('', [EventController::class, 'index'])->name('p.event');
+        });
+
+        // Module Pemasukkan
+        Route::group(['prefix' => 'Pemasukkan'], function(){
+            Route::get('', [PemasukkanController::class, 'index'])->name('p.pemasukkan');
+        });
+    });
+
     Route::group(['roles' => 'Member', 'prefix' => 'Member'], function(){
         // Module Kelas Senam
         Route::group(['prefix' => 'Kelas-Senam'], function(){
@@ -158,6 +170,33 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function(){
         // Module Pembayaran
         Route::group(['prefix' => 'Pembayaran'], function(){
             Route::get('', [PembayaranController::class, 'index'])->name('m.pembayaran');
+        });
+    });
+
+    Route::group(['roles' => 'Non-Member', 'prefix' => 'Non-Member'], function(){
+        // Module Kelas Senam
+        Route::group(['prefix' => 'Kelas-Senam'], function(){
+            Route::get('', [KelasSenamController::class, 'index'])->name('nm.kelassenam');
+        });
+
+        // Module Pelatih
+        Route::group(['prefix' => 'Pelatih'], function(){
+            Route::get('', [PelatihController::class, 'index'])->name('nm.pelatih');
+        });
+
+        // Module Daftar Kelas
+        Route::group(['prefix' => 'Daftar-Kelas-Senam'], function(){
+            Route::get('', [DaftarKelasSenamController::class, 'index'])->name('nm.daftarKelas');
+            Route::get('tambah-data/{id}', [DaftarKelasSenamController::class, 'insert'])->name('nm.daftarKelas.add');
+            Route::post('simpan-data', [DaftarKelasSenamController::class, 'store'])->name('nm.daftarKelas.store');
+            Route::get('{uuid}', [DaftarKelasSenamController::class, 'edit'])->name('nm.daftarKelas.edit');
+            // batalkan
+            Route::delete('delete/{uuid}', [DaftarKelasSenamController::class, 'destroy'])->name('nm.daftarKelas.delete');
+        });
+
+        // Module Pembayaran
+        Route::group(['prefix' => 'Pembayaran'], function(){
+            Route::get('', [PembayaranController::class, 'index'])->name('nm.pembayaran');
         });
     });
 });

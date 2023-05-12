@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Gym App - @yield('title')</title>
+    <title>Sanggar Senam Atheena - @yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -33,7 +33,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <p class="animation__wobble">Gym App</p>
+            <p class="animation__wobble">Sanggar Senam Atheena</p>
         </div>
 
         @include('layouts.includes.navbar')

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Audience')
+@section('title', 'Pemasukkan')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Data Audience</h1>
+                        <h1 class="m-0">Data Pemasukkan</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Data Audience</li>
+                            <li class="breadcrumb-item active">Data Pemasukkan</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -31,14 +31,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Data Audience</h5>
-                                @if(Auth::user()->role_id == 2)
-                                    <div class="card-tools">
-                                        <a href="{{ route('anggota.add') }}" class="btn btn-success btn-sm">
-                                            <i class="fas fa-plus"></i> Tambah Data
-                                        </a>
-                                    </div>
-                                @endif
+                                <h5 class="card-title">Data Pemasukkan</h5>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -49,30 +42,18 @@
                                             <tr>
                                                 <th width="5%" style="text-align: center;">No</th>
                                                 <th>Nama Kelas</th>
-                                                <th>Jumlah Audience</th>
-                                                <th>Total Hadir</th>
-                                                @if(Auth::user()->role_id == 2)
-                                                    <th width="10%">Aksi</th>
-                                                @endif
+                                                <th>Pendapatan</th>
+                                                <th>Tanggal</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($audience as $data)
-                                                @if($data->nama == '' && $data->total_audience == 0 && $data->total_hadir == 0)
-                                                @else
-                                                    <tr>
-                                                        <td>{{ $no++ }}</td>
-                                                        <td>{{ $data->nama }}</td>
-                                                        <td>{{ $data->total_audience }}</td>
-                                                        <td>{{ $data->total_hadir }}</td>
-                                                        @if(Auth::user()->role_id == 2)
-                                                            <td>
-                                                                <a href="{{ route('anggota.edit', $data->id) }}"> <button class="btn btn-warning btn-sm"><i class="fa fa-eye"></i></button></a>
-                                                                <button type="button" class="btn btn-danger btn-sm" onClick="deleteData('.$data->id.')"><i class="fa fa-trash"></i></button>
-                                                            </td>
-                                                        @endif
-                                                    </tr>
-                                                @endif
+                                            @foreach ($pemasukkan as $data)
+                                                <tr>
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>{{ $data->nama }}</td>
+                                                    <td>{{ $data->pendapatan }}</td>
+                                                    <td>{{ date('d F Y', strtotime($data->tanggal)) }}</td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -92,7 +73,7 @@
     </div>
 @endsection
 
-@section('script')
+@section('footer')
 @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
 <script>
     var dtTableOption = {

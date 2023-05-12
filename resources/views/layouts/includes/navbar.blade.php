@@ -17,10 +17,10 @@
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">Setting</span>
-                <div class="dropdown-divider"></div>
+                {{-- <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
                     <i class="fas fa-user mr-2"></i> My Profile
-                </a>
+                </a> --}}
                 <div class="dropdown-divider"></div>
                 <a href="{{route('logout')}}" class="dropdown-item">
                     <i class="fas fa-sign-out-alt mr-2"></i> Sign Out
@@ -40,7 +40,7 @@
     <div class="container">
       <a href="" class="navbar-brand">
         <img src="#" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Gym App</span>
+        <span class="brand-text font-weight-light">Sanggar Senam Atheena</span>
       </a>
 
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

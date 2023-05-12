@@ -64,8 +64,9 @@
                                                 <th>Sesi</th>
                                                 <th>Pelatih</th>
                                                 <th>Diskon</th>
+                                                <th>Harga</th>
                                                 <th>Hari</th>
-                                                @if(Auth::user()->role_id == 4)
+                                                @if(Auth::user()->role_id == 4 || Auth::user()->role_id == 5)
                                                     <th width="10%">Aksi</th>
                                                 @endif
                                             </tr>
@@ -78,10 +79,16 @@
                                                     <td>{{ $data->sesi }}</td>
                                                     <td>{{ $data->nama_pelatih }}</td>
                                                     <td>{{ $data->diskon.'%' }}</td>
+                                                    <td>{{ 'Rp '.$data->harga }}</td>
                                                     <td>{{ $data->hari }}</td>
                                                     @if(Auth::user()->role_id == 4)
                                                         <td>
-                                                            <a href="{{ route('a.daftarKelas.add', $data->id) }}"> <button class="btn btn-warning btn-sm">Daftar Kelas</button></a>
+                                                            <a href="{{ route('m.daftarKelas.add', $data->id) }}"> <button class="btn btn-warning btn-sm">Daftar Kelas</button></a>
+                                                        </td>
+                                                    @endif
+                                                    @if(Auth::user()->role_id == 5)
+                                                        <td>
+                                                            <a href="{{ route('nm.daftarKelas.add', $data->id) }}"> <button class="btn btn-warning btn-sm">Daftar Kelas</button></a>
                                                         </td>
                                                     @endif
                                                 </tr>

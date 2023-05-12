@@ -2,9 +2,9 @@
  <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('dashboard')}}" class="brand-link">
-        <img src="" alt="Gym App" class="brand-image img-circle elevation-3"
+        <img src="" alt="Sanggar Senam Atheena" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-light">Gym App</span>
+        <span class="brand-text font-weight-light">Sanggar Senam Atheena</span>
     </a>
 
     <!-- Sidebar -->
@@ -25,7 +25,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item">
-                        <a href="{{ route('loginpage') }}"
+                        <a href="{{ route('dashboard') }}"
                             class="nav-link {{ request()->is('login') ? ' active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -72,7 +72,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                     <li class="nav-item">
-                        <a href="{{ route('loginpage') }}"
+                        <a href="{{ route('dashboard') }}"
                             class="nav-link {{ request()->is('login') ? ' active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -135,7 +135,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item">
-                        <a href="{{ route('loginpage') }}"
+                        <a href="{{ route('dashboard') }}"
                             class="nav-link {{ request()->is('login') ? ' active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -144,32 +144,24 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
-                            <p>
-                                Pelatih
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
+                        <a href="{{ route('p.anggota') }}" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Anggota
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
+                        <a href="{{ route('p.event') }}" class="nav-link">
+                            <i class="nav-icon fas fa-city"></i>
                             <p>
-                                Audience
+                                Events
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
+                        <a href="{{ route('p.pemasukkan') }}" class="nav-link">
+                            <i class="nav-icon fas fa-money-bill"></i>
                             <p>
                                 Pemasukkan
                             </p>
@@ -178,66 +170,11 @@
                 </ul>
             </nav>
         @elseif(Auth::user()->role_id == 4)
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
-                <li class="nav-item">
-                    <a href="{{ route('loginpage') }}"
-                        class="nav-link {{ request()->is('login') ? ' active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('m.kelassenam') }}" class="nav-link">
-                        <i class="nav-icon fas fa-landmark"></i>
-                        <p>
-                            Kelas Senam
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('m.pelatih') }}" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>
-                            Pelatih
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('m.daftarKelas')}}" class="nav-link">
-                        <i class="nav-icon fas fa-cash-register"></i>
-                        <p>
-                            Daftar Kelas Senam
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('m.pembayaran') }}" class="nav-link">
-                        <i class="nav-icon fas fa-film"></i>
-                        <p>
-                            Pembayaran
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('m.event') }}" class="nav-link">
-                        <i class="nav-icon fas fa-city"></i>
-                        <p>
-                            Event
-                        </p>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        @elseif(Auth::user()->role_id == 5)
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item">
-                        <a href="{{ route('loginpage') }}"
+                        <a href="{{ route('dashboard') }}"
                             class="nav-link {{ request()->is('login') ? ' active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -246,32 +183,88 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
+                        <a href="{{ route('m.kelassenam') }}" class="nav-link">
+                            <i class="nav-icon fas fa-landmark"></i>
+                            <p>
+                                Kelas Senam
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('m.pelatih') }}" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
                             <p>
                                 Pelatih
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
-                            <p>
-                                Jadwal & Harga Kelas Senam
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
+                        <a href="{{route('m.daftarKelas')}}" class="nav-link">
+                            <i class="nav-icon fas fa-cash-register"></i>
                             <p>
                                 Daftar Kelas Senam
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-film"></i>
+                        <a href="{{ route('m.pembayaran') }}" class="nav-link">
+                            <i class="nav-icon fas fa-money-bill"></i>
+                            <p>
+                                Pembayaran
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('m.event') }}" class="nav-link">
+                            <i class="nav-icon fas fa-city"></i>
+                            <p>
+                                Event
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        @elseif(Auth::user()->role_id == 5)
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-item">
+                        <a href="{{ route('dashboard') }}"
+                            class="nav-link {{ request()->is('login') ? ' active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('nm.pelatih') }}"
+                            class="nav-link {{ request()->is('login') ? ' active' : '' }}">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Pelatih
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('nm.kelassenam') }}" class="nav-link">
+                            <i class="nav-icon fas fa-landmark"></i>
+                            <p>
+                                Jadwal & Harga Kelas Senam
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('nm.daftarKelas') }}" class="nav-link">
+                            <i class="nav-icon fas fa-cash-register"></i>
+                            <p>
+                                Daftar Kelas Senam
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('nm.pembayaran') }}" class="nav-link">
+                            <i class="nav-icon fas fa-money-bill"></i>
                             <p>
                                 Pembayaran
                             </p>

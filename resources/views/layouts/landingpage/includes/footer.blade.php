@@ -50,7 +50,7 @@
     <div class="row gx-5">
         <div class="col-lg-8">
             <div class="py-lg-4 text-center">
-                <p class="text-secondary mb-0">&copy; <a class="text-light fw-bold" href="#">Gym App</a>. All Rights Reserved.</p>
+                <p class="text-secondary mb-0">&copy; <a class="text-light fw-bold" href="#">Sanggar Senam Atheena</a>. All Rights Reserved.</p>
             </div>
         </div>
         <div class="col-lg-4">
