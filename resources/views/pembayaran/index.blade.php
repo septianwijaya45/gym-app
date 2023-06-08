@@ -32,19 +32,12 @@
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title">Data Pembayaran</h5>
-                                @if(Auth::user()->role_id == 4 || Auth::user()->role_id == 5)
-                                <div class="card-tools">
-                                    <select name="status" id="status" class="form-control float-right">
-                                        <option value="1">Sudah Dibayar</option>
-                                        <option value="0">Belum Dibayar</option>
-                                    </select>
-                                </div>
-                                @endif
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div id="tbl_kain_roll_wrapper"
                                     class="dataTables_wrapper dt-bootstrap4 table-responsive text-nowrap">
+                                    @if(Auth::user()->role_id == 1 && Auth::user()->role_id == 2)
                                     <table id="dataTable" class="table table-bordered table-striped dataTable" style="width: 100%;">
                                         <thead>
                                             <tr>
@@ -52,7 +45,6 @@
                                                 <th>Nama Pemesan</th>
                                                 <th>Pendaftaran Kelas</th>
                                                 <th>Total Pembayaran</th>
-                                                <th>Bukti Pembayaran</th>
                                                 <th>Konfirmasi</th>
                                             </tr>
                                         </thead>
@@ -63,9 +55,9 @@
                                                     <td>{{ $data->nama_anggota }}</td>
                                                     <td>{{ $data->nama_kelas }}</td>
                                                     <td>Rp {{ $data->total_dibayar }}</td>
-                                                    <td>
+                                                    {{-- <td>
                                                         <img src="{{ asset('/img/payment/'.$data->bukti_transfer) }}" alt="Bukti Pembayaran" width="200">
-                                                    </td>
+                                                    </td> --}}
                                                     <td>
                                                         @if($data->status_konfirmasi == 1)
                                                             <button type="button" class="btn btn-sm btn-light disabled">Terkonfirmasi</button>
@@ -80,7 +72,8 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <table id="dataTable2" class="table table-bordered table-striped dataTable" style="width: 100%; display:none">
+                                    @else
+                                    <table id="dataTable2" class="table table-bordered table-striped dataTable" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th width="5%" style="text-align: center;">No</th>
@@ -111,7 +104,7 @@
                                                         @if($data->status_pembayaran == 1)
                                                             <button type="button" class="btn btn-sm btn-light disabled">Selesai Pembayaran</button>
                                                         @elseif($data->status_pembayaran == 0 || $data->status_pembayaran == null)
-                                                            <button type="button" class="btn btn-sm btn-warning" onclick="pembayaran({{$data->id}})">Bayar Pesanan</button>
+                                                            <a href="{{ route('m.detailPembayaran', $data->id) }}" type="button" class="btn btn-sm btn-warning" >Bayar Pesanan</a>
                                                             <button type="button" class="btn btn-sm btn-danger" onclick="batalPesanan({{$data->id}})">Batalkan Pesanan</button>
                                                         @elseif($data->status_pembayaran == 2)
                                                             <button type="button" class="btn btn-sm btn-danger" disabled>Dibatalkan</button>
@@ -121,6 +114,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    @endif
                                 </div>
                             </div>
                             <!-- ./card-body -->
@@ -259,6 +253,26 @@
     };
 
     $("#dataTable").DataTable(dtTableOption)
+    $("#dataTable2").DataTable(dtTableOption)
+
+    $('#status').on('change', function(){
+        let value = $(this).val();
+        if(value == '1'){
+            $('#dataTable').each(function(){
+                $(this).show();
+            });
+            $('#dataTable2').each(function(){
+                $(this).hide();
+            });
+        }else{
+            $('#dataTable').each(function(){
+                $(this).hide();
+            });
+            $('#dataTable2').each(function(){
+                $(this).show();
+            });
+        }
+    })
 </script>
 @endif
 @endsection

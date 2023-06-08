@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KelasSenamController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PelatihController;
 use App\Http\Controllers\PemasukkanController;
 use App\Http\Controllers\PembayaranController;
@@ -170,6 +171,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function(){
         // Module Pembayaran
         Route::group(['prefix' => 'Pembayaran'], function(){
             Route::get('', [PembayaranController::class, 'index'])->name('m.pembayaran');
+            Route::get('/{id}', [PembayaranController::class, 'detailPembayaran'])->name('m.detailPembayaran');
+            Route::post('/payment', [PembayaranController::class, 'payment'])->name('m.payment');
         });
     });
 
